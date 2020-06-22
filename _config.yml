@@ -1,19 +1,21 @@
 title: Your awesome title
-author: GitHub User
-email: your-email@domain.com
+author: Peng Zhang
+email: zzp159@gmail.com
 description: > # this means to ignore newlines until "show_exerpts:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+ Start my technology journey from here. Log daily life and learning experience.
+#Write an awesome description for your new site here. You can edit this
+#  line in _config.yml. It will appear in your document head meta (for
+#  Google search results) and in your feed.xml site description.
 show_excerpts: true # set to true to show excerpts on the homepage
+remote_theme: thelehhman/plainwhite-jekyll
 
 # Minima date format
 # refer to http://shopify.github.io/liquid/filters/date/ if you want to customize this
 sass:
   sass_dir: _sass
 plainwhite:
-  name: Adam Denisov
-  tagline: Developer. Designer
+  name: Zhuopeng
+  tagline: Developer
   date_format: "%b %-d, %Y"
   sitemap: true # set to true to generate sitemap.xml content
   search: true # set to true to enable searchbar
@@ -21,8 +23,8 @@ plainwhite:
 
   # generate social links in footer
   social_links:
-    twitter: thelehhman
-    github:  thelehhman
+    twitter: 
+    github:  
     linkedIn: in/thelehhman
     rss: rss
     # dribbble: jekyll
