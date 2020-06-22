@@ -24,7 +24,7 @@ plainwhite:
   # generate social links in footer
   social_links:
     twitter: 
-    github: "https://github.com/pen-zhang"
+    github: pen-zhang
     linkedIn: in/zhuopeng-zhang-9a441238/
     rss: rss
     # dribbble: jekyll
