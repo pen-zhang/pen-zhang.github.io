@@ -20,13 +20,13 @@ Problem statement:
 
 Input: 
 
-​	an array A[1...n] of (positive/negative) numbers. 
+​	an array $$A[1...n]$$ of (positive/negative) numbers. 
 
 Output: 
 
-1.  Indices $i$ and $j$ such that the subarray $A[i...j]$ has the greatest sum of any nonempty contiguous subarray of A, and 
+1.  Indices $i$ and $j$ such that the subarray $$A$$​ has the greatest sum of any nonempty contiguous subarray of $$A$$, and 
 
-2.  the sum of the values in $A[i...j]$. 
+2.  the sum of the values in $$A[i...j]$$. 
 
 **Note:** Maximum subarray might not be unique, though its value is, so we speak of a maximum subarray, rather than the maximum subarray.
 
@@ -34,14 +34,14 @@ Algorithm Solve by Divide-and -Conquer
 
 -   Generic problem: 
 
--   -   Find a maximum subarray of $A[low...high]$
+-   -   Find a maximum subarray of $$A[low...high]$$
     -   with initial call: *low* = 1 and *high* = n 
 
 -   DC strategy: 
 
-	1.  Divide  $A[low...high]$ into two subarrays of as equal size as possible by finding the midpoint *mid*
+	1.  Divide  $$A[low...high]$$ into two subarrays of as equal size as possible by finding the midpoint *mid*
     2.  Conquer: 
-        *   finding maximum subarrays of $A[low...mid]$ and $A[mid + 1...high]$
+        *   finding maximum subarrays of $$A[low...mid]$$ and $$A[mid + 1...high]$$
 		*	finding a max-subarray that crosses the midpoint 
     3.	Combine: returning the max of the three
 
