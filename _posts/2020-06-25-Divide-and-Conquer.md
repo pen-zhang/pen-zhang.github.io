@@ -24,7 +24,7 @@ Input:
 
 Output: 
 
-1.  Indices $i$ and $j$ such that the subarray $$A$$​ has the greatest sum of any nonempty contiguous subarray of $$A$$, and 
+1.  Indices $$i$$ and $$j$$ such that the subarray $$A$$ has the greatest sum of any nonempty contiguous subarray of $$A$$, and 
 
 2.  the sum of the values in $$A[i...j]$$. 
 
