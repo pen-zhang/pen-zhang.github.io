@@ -3,6 +3,7 @@ layout: post
 title: "Divide-and-Conquer"
 date: 2020-06-25 12:32:36 -0400
 categories: Algorithm Python
+excerpt_separator: <!--more-->
 ---
 
 The divide-and-conquer (DC) strategy solves a problem by 
@@ -10,6 +11,8 @@ The divide-and-conquer (DC) strategy solves a problem by
 1.  Breaking the problem into subproblems that are themselves smaller instances of the same type of problem (”divide”), 
 2.  Recursively solving these subproblems (”conquer”), 
 3.  Appropriately combining their answers (”combine”)
+
+<!--more-->
 
 ## The maximum-subarray problem
 
