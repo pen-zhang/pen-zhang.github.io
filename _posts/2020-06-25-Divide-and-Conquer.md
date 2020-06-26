@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Divide-and-Conquer"
-date: 2020-06-25
-categories: Algorithm
+date: 2020-06-25 12:32:36 -0400
+categories: Algorithm Python
 ---
 
 The divide-and-conquer (DC) strategy solves a problem by 
@@ -27,8 +27,6 @@ Output:
 
 **Note:** Maximum subarray might not be unique, though its value is, so we speak of a maximum subarray, rather than the maximum subarray.
 
- 
-
 Algorithm Solve by Divide-and -Conquer
 
 -   Generic problem: 
@@ -46,60 +44,13 @@ Algorithm Solve by Divide-and -Conquer
 
 -   Correctness: This  strategy works because any subarray must either lie entirely in one side of midpoint or cross the midpoint. 
 
-
-
-```pseudocode
-MaxSubarray(A,low,high)
-if high == low 	// base case: only one element
-	return (low, high, A[low])
-else
-	// divide
-	mid = floor( (low + high)/2 )
-	// conquer
-	(leftlow,lefthigh,leftsum) = MaxSubarray(A,low,mid)
-	(rightlow,righthigh,rightsum) = MaxSubarray(A,mid+1,high)
-	(xlow,xhigh,xsum) = MaxXingSubarray(A,low,mid,high)
-	// combine
-	if leftsum >= rightsum and leftsum >= xsum
-		return (leftlow,lefthigh,leftsum)
-	else if rightsum >= leftsum and rightsum >= xsum
-		return (rightlow,righthigh,rightsum)
-	else
-		return (xlow,xhigh,xsum)
-	end if
-end if
-
-MaxXingSubarray(A,low,mid,high)
-leftsum = -infty; sum = 0 	// Find max-subarray of A[i..mid]
-for i = mid downto low
-	sum = sum + A[i]
-	if sum > leftsum
-		leftsum = sum
-		maxleft = i
-	end if
-end for
-rightsum = -infty; sum = 0 	// Find max-subarray of A[mid+1..j]
-for j = mid+1 to high
-	sum = sum + A[j]
-	if sum > rightsum
-		rightsum = sum
-		maxright = j
-	end if
-end for
-// Return the indices i and j and the sum of two subarrays
-return (maxleft,maxright,leftsum+rightsum)
-
-```
-
-
-
 Python:
 
 ```python
 def maxSubArray(nums):
     def help_maxSubArray(l,low,high):
         print(low,high)
-        if high==low:
+        if high==low:	# base case: only one element
             return low,high,l[low]
         else:
             #divide
@@ -137,6 +88,7 @@ def maxSubArray(nums):
             if _sum>right_sum:
                 right_sum=_sum
                 max_right=j
+        #Return the indices i and j and the sum of two subarrays
         return max_left,max_right,left_sum+right_sum
     
     low,high,out_sum=help_maxSubArray(nums,0,len(nums)-1)
