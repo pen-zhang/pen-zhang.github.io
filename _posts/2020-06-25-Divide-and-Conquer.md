@@ -5,8 +5,6 @@ date:   2020-06-25
 categories: Algorithm
 ---
 
-# Divide-and-Conquer
-
 The divide-and-conquer (DC) strategy solves a problem by 
 
 1.  Breaking the problem into subproblems that are themselves smaller instances of the same type of problem (”divide”), 
