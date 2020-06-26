@@ -55,7 +55,7 @@ markdown: kramdown
 kramdown:
         math_engine: mathjax
         coderay_line_numbers: inline
-        syntax_highlighter: coderay
+        syntax_highlighter: rouge
 
 
 plugins:
