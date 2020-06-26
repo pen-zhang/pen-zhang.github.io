@@ -4,7 +4,7 @@ title: "Divide-and-Conquer"
 date: 2020-06-25 12:32:36 -0400
 categories: Algorithm Python
 excerpt_separator: <!--more-->
-usemathjax: true
+mathjax: true
 ---
 
 The divide-and-conquer (DC) strategy solves a problem by 
