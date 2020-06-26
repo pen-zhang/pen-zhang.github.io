@@ -54,9 +54,7 @@ plainwhite:
 markdown: kramdown
 kramdown:
         math_engine: mathjax
-        coderay_line_numbers: inline
-        syntax_highlighter: coderay
-
+        sytax_highlighter: rouge
 
 plugins:
   - jekyll-seo-tag

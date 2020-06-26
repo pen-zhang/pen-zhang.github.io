@@ -34,7 +34,7 @@ Algorithm Solve by Divide-and -Conquer
 
 -   Generic problem: 
 
--   -   Find a maximum subarray of $$A[low...high]$$
+	-   Find a maximum subarray of $$A[low...high]$$
     -   with initial call: *low* = 1 and *high* = n 
 
 -   DC strategy: 
