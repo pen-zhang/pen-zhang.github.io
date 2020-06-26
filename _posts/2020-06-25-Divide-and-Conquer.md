@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Divide-and-Conquer"
-date:   2020-06-25
+title: "Divide-and-Conquer"
+date: 2020-06-25
 categories: Algorithm
 ---
 
