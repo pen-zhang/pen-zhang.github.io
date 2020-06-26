@@ -1,0 +1,148 @@
+---
+layout: post
+title:  "Divide-and-Conquer"
+date:   2020-06-25
+categories: Algorithm
+---
+
+# Divide-and-Conquer
+
+The divide-and-conquer (DC) strategy solves a problem by 
+
+1.  Breaking the problem into subproblems that are themselves smaller instances of the same type of problem (”divide”), 
+2.  Recursively solving these subproblems (”conquer”), 
+3.  Appropriately combining their answers (”combine”)
+
+## The maximum-subarray problem
+
+Problem statement: 
+
+Input: 
+
+​	an array A[1...n] of (positive/negative) numbers. 
+
+Output: 
+
+1.  Indices $i$ and $j$ such that the subarray $A[i...j]$ has the greatest sum of any nonempty contiguous subarray of A, and 
+
+2.  the sum of the values in $A[i...j]$. 
+
+**Note:** Maximum subarray might not be unique, though its value is, so we speak of a maximum subarray, rather than the maximum subarray.
+
+ 
+
+Algorithm Solve by Divide-and -Conquer
+
+-   Generic problem: 
+
+-   -   Find a maximum subarray of $A[low...high]$
+    -   with initial call: *low* = 1 and *high* = n 
+
+-   DC strategy: 
+
+	1.  Divide  $A[low...high]$ into two subarrays of as equal size as possible by finding the midpoint *mid*
+    2.  Conquer: 
+        *   finding maximum subarrays of $A[low...mid]$ and $A[mid + 1...high]$
+		*	finding a max-subarray that crosses the midpoint 
+    3.	Combine: returning the max of the three
+
+-   Correctness: This  strategy works because any subarray must either lie entirely in one side of midpoint or cross the midpoint. 
+
+
+
+```pseudocode
+MaxSubarray(A,low,high)
+if high == low 	// base case: only one element
+	return (low, high, A[low])
+else
+	// divide
+	mid = floor( (low + high)/2 )
+	// conquer
+	(leftlow,lefthigh,leftsum) = MaxSubarray(A,low,mid)
+	(rightlow,righthigh,rightsum) = MaxSubarray(A,mid+1,high)
+	(xlow,xhigh,xsum) = MaxXingSubarray(A,low,mid,high)
+	// combine
+	if leftsum >= rightsum and leftsum >= xsum
+		return (leftlow,lefthigh,leftsum)
+	else if rightsum >= leftsum and rightsum >= xsum
+		return (rightlow,righthigh,rightsum)
+	else
+		return (xlow,xhigh,xsum)
+	end if
+end if
+
+MaxXingSubarray(A,low,mid,high)
+leftsum = -infty; sum = 0 	// Find max-subarray of A[i..mid]
+for i = mid downto low
+	sum = sum + A[i]
+	if sum > leftsum
+		leftsum = sum
+		maxleft = i
+	end if
+end for
+rightsum = -infty; sum = 0 	// Find max-subarray of A[mid+1..j]
+for j = mid+1 to high
+	sum = sum + A[j]
+	if sum > rightsum
+		rightsum = sum
+		maxright = j
+	end if
+end for
+// Return the indices i and j and the sum of two subarrays
+return (maxleft,maxright,leftsum+rightsum)
+
+```
+
+
+
+Python:
+
+```python
+def maxSubArray(nums):
+    def help_maxSubArray(l,low,high):
+        print(low,high)
+        if high==low:
+            return low,high,l[low]
+        else:
+            #divide
+            mid=math.floor((low+high)/2)
+            print(low,mid,high)
+            #conquer
+            left_low,left_high,left_sum=help_maxSubArray(l,low,mid)
+            print('left checked')
+            right_low,right_high,right_sum=help_maxSubArray(l,mid+1,high)
+            print('right checked')
+            x_low,x_high,x_sum=MaxXingSubArray(l,low,mid,high)
+            print('xross checked')
+            #combine
+            if left_sum>=right_sum and left_sum>=x_sum:
+                return left_low,left_high,left_sum
+            elif right_sum>=left_sum and right_sum>=x_sum:
+                return right_low,right_high,right_sum
+            else:
+                return x_low,x_high,x_sum
+
+    def MaxXingSubArray(l,low,mid,high):
+        #find max-subarray of l[i...mid]
+        left_sum=-math.inf
+        _sum=0
+        for i in range(mid,low-1,-1):
+            _sum += l[i]
+            if _sum>left_sum:
+                left_sum=_sum
+                max_left=i
+        #find max-subarray of l[mid+1...j]
+        right_sum=-math.inf
+        _sum=0
+        for j in range(mid+1,high+1):
+            _sum += l[j]
+            if _sum>right_sum:
+                right_sum=_sum
+                max_right=j
+        return max_left,max_right,left_sum+right_sum
+    
+    low,high,out_sum=help_maxSubArray(nums,0,len(nums)-1)
+    print(low,high,out_sum)
+    return out_sum
+```
+
