@@ -2,7 +2,7 @@
 layout: post
 title: "Learning Log of Elm"
 date: 2020-07-25 15:09:00 -0400
-categories: Elm Functional Programming
+categories: Elm FunctionalProgramming
 excerpt_separator: <!--more-->
 ---
 
@@ -12,11 +12,7 @@ Elm provides quite a few benefits that are lacking in most mainstream languages:
 
 <!--more-->
 
-## Learning Log of Elm
 
-Elm programming language is a notation for writing programs that run on a web browser. The description of the language is split into two components: syntax and semantics.
-
-Elm provides quite a few benefits that are lacking in most mainstream languages: immutable values, pure functions, fuzz testing, a powerful type system, pattern matching, and the absence of runtime errors.
 
 ```elm
 module Playground exposing (main)
