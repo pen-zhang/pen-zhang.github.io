@@ -11,7 +11,7 @@ Simplistic jekyll portfolio-style theme for writers.
 Add this line to your site's `_config.yml`:
 
 ```yaml
-remote_theme: thelehhman/plainwhite-jekyll
+remote_theme: samarsault/plainwhite-jekyll
 ```
 
 ## Installation
@@ -47,14 +47,19 @@ plainwhite:
   date_format: "%b %-d, %Y"
 
   social_links:
-    twitter: thelehhman
-    github: thelehhman
-    linkedIn: in/thelehhman # format: locale/username
+    twitter: samarsault
+    github: samarsault
+    linkedIn: in/samarsault # format: locale/username
 ```
 
 **Updating Placeholder Image**
 
-The placeholder portfolio image can be replaced by the desired image by placing it as `assets/portfolio.png` in your jekyll website.
+The placeholder portfolio image can be replaced by the desired image by placing it as `assets/portfolio.png` in your jekyll website, or by changing the following line in `_config.yaml`
+
+```yaml
+plainwhite:
+  portfolio_image:  "assets/portfolio.png" # the path from the base directory of the site to the image to display (no / at the start)
+```
 
 **Comments (Disqus)**
 
@@ -148,9 +153,28 @@ plainwhite:
 
 Search is powered by [Simple-Jekyll-Search](https://github.com/christian-fei/Simple-Jekyll-Search) Jekyll plugin. A `search.json` containing post meta and contents will be generated in site root folder. Plugin JavaScript will then match for posts based on user input. More info and `search.json` customization documentation can be found in plugin repository.
 
+**Base URL**
+
+You can specify a custom base URL (eg. example.com/blog/) by adding the following line to `_config.yaml`. Note that there is no trailing slash on the URL.
+
+```yaml
+baseurl: "/blog"
+```
+
+**Language**
+
+You can set the `lang` attribute of the `<html>` tag on your pages by changing the following line in `_config.yml`:
+
+```yaml
+plainwhite:
+  html_lang: "en"
+```
+
+[See here for a full list of available language codes](https://www.w3schools.com/tags/ref_country_codes.asp)
+
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/thelehhman/plainwhite-jekyll. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/samarsault/plainwhite-jekyll. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## Development
 
@@ -172,4 +196,4 @@ The theme is available as open source under the terms of the [MIT License](https
 
 ## More themes
 
-- [Texture](https://github.com/thelehhman/texture)
+- [Texture](https://github.com/samarsault/texture)
