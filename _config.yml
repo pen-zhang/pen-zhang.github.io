@@ -15,18 +15,19 @@ remote_theme: thelehhman/plainwhite-jekyll
 sass:
   sass_dir: _sass
 plainwhite:
-  name: Zhuopeng
+  name: Peng Zhang
   tagline: Developer
   date_format: "%b %-d, %Y"
   sitemap: true # set to true to generate sitemap.xml content
   search: true # set to true to enable searchbar
   dark_mode: true # set to true to add dark mode toggle
+  portfolio_image:  "assets/portfolio.png"
 
   # generate social links in footer
   social_links:
     twitter: 
     github: pen-zhang
-    linkedIn: in/zhuopeng-zhang-9a441238/
+    linkedIn: in/zhuopeng-zhang/
     rss: rss
     # dribbble: jekyll
     # flickr:   jekyll

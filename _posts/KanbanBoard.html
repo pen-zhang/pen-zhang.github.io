@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="EN">
+  <head>
+    <meta charset="utf-8" />
+    <title>KanBan Board</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.0/chart.min.js"
+      integrity="sha512-asxKqQghC1oBShyhiBwA+YgotaSYKxGP1rcSYTDrB0U6DxwlJjU59B67U8+5/++uFjcuVM8Hh5cokLjZlhm3Vg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <style type="text/css">
+      .status-1 {
+        background-color: #ed8077;
+      }
+      .status-2 {
+        background-color: #4488c5;
+      }
+      .status-3 {
+        background-color: #5eb5a6;
+      }
+      .card {
+        margin-bottom: 5px;
+      }
+      .card-footer-item {
+        padding-top: 0px;
+        padding-bottom: 0px;
+      }
+      .fade-enter-active,
+      .fade-leave-active {
+        transition: opacity 0.7s;
+      }
+      .fade-enter,
+      .fade-leave-to {
+        opacity: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="section" id="board">
+      <div class="container">
+        <input type="text" v-model="newTaskName" />
+        <select v-model="newTaskAssignee">
+          <option value="🐱">🐱</option>
+          <option value="🐶">🐶</option>
+          <option value="🐹">🐹</option>
+        </select>
+        <input type="number" v-model="newTaskMandays" />
+        <button @click="addTask">Add Task</button>
+        <hr />
+        <div class="columns">
+          <div class="column status-1">
+            <div class="tags has-addons">
+              <span class="tag">Backlog</span>
+              <span class="tag is-dark">{{ tasksOpen.length }}</span>
+            </div>
+            <transition-group name="fade">
+              <task-card :task="task" v-for="task in tasksOpen" :key="task.name"></task-card>
+            </transition-group>
+          </div>
+          <div class="column status-2">
+            <div class="tags has-addons">
+              <span class="tag">In Progress</span>
+              <span class="tag is-dark">{{ tasksDoing.length }}</span>
+            </div>
+            <transition-group name="fade">
+              <task-card :task="task" v-for="task in tasksDoing" :key="task.name"></task-card>
+            </transition-group>
+          </div>
+          <div class="column status-3">
+            <div class="tags has-addons">
+              <span class="tag">Done</span>
+              <span class="tag is-dark">{{ tasksClosed.length }}</span>
+            </div>
+            <transition-group name="fade">
+              <task-card :task="task" v-for="task in tasksClosed" :key="task.name"></task-card>
+            </transition-group>
+          </div>
+        </div>
+      </div>
+      <div class="container" style="height: 400px; width: 400px">
+        <canvas id="myChart" class="mt-4"></canvas>
+      </div>
+    </section>
+
+    <script type="text/javascript">
+      /*
+       * Kanban Board
+       *
+       * Please find ChartJS and use that library to add ONE single graph at the bottom of the page
+       * which will show an up to date pie chart of:
+       *
+       * a) items in backlog
+       * b) items in progress
+       * c) items which are done
+       *
+       * along with the percentage of total items that each represents.
+       *
+       * This exercise might be challenging and require a bit of Googling and will likely take the
+       * longest to solve of all the test questions.
+       */
+
+      var filters = {
+        open: function (tasks) {
+          return tasks.filter(function (task) {
+            return task.status === 1;
+          });
+        },
+        doing: function (tasks) {
+          return tasks.filter(function (task) {
+            return task.status === 2;
+          });
+        },
+        closed: function (tasks) {
+          return tasks.filter(function (task) {
+            return task.status === 3;
+          });
+        },
+      };
+
+      Vue.component("task-card", {
+        props: ["task"],
+        template: `<div class="card">
+                <div class="card-content">
+                  {{ task.name }}
+                </div>
+                <footer class="card-footer">
+                  <div class="card-footer-item">
+                    {{ task.assignee }}
+                  </div>
+                  <div class="card-footer-item">
+                    {{ task.mandays }} Days
+                  </div>
+                </footer>
+                <footer class="card-footer">
+                  <a class="card-footer-item" @click="decrementStatus(task)">◀︎</a>
+                  <a class="card-footer-item" @click="incrementStatus(task)">▶︎</a>
+                </footer>
+              </div>`,
+        methods: {
+          incrementStatus: function (task) {
+            if (1 <= task.status && task.status <= 2) {
+              task.status++;
+            }
+          },
+          decrementStatus: function (task) {
+            if (2 <= task.status && task.status <= 3) {
+              task.status--;
+            }
+          },
+        },
+        created() {
+          console.log("new component created");
+        },
+      });
+
+      console.log("before new Vue");
+
+      new Vue({
+        el: "#board",
+        data: {
+          tasks: [
+            { name: "task 1", status: 1, assignee: "🐱", mandays: 3 },
+            { name: "task 2", status: 1, assignee: "🐶", mandays: 2 },
+            { name: "task 3", status: 2, assignee: "🐱", mandays: 1 },
+            { name: "task 4", status: 3, assignee: "🐹", mandays: 1 },
+          ],
+          newTaskName: "",
+          newTaskAssignee: null,
+          newTaskMandays: 0,
+        },
+        computed: {
+          tasksOpen: function () {
+            return filters.open(this.tasks);
+          },
+          tasksDoing: function () {
+            return filters.doing(this.tasks);
+          },
+          tasksClosed: function () {
+            return filters.closed(this.tasks);
+          },
+        },
+        methods: {
+          addTask() {
+            this.tasks.push({
+              name: this.newTaskName,
+              status: 1,
+              assignee: this.newTaskAssignee,
+              mandays: this.newTaskMandays,
+            });
+          },
+        },
+        mounted: function () {
+          console.log("mounted");
+          this.$nextTick(() => {
+            console.log("mounted->nextTick");
+            myChart.data.datasets[0].data = [this.tasksOpen.length, this.tasksDoing.length, this.tasksClosed.length];
+
+            myChart.update();
+          });
+        },
+
+        updated: function () {
+          myChart.data.datasets[0].data = [this.tasksOpen.length, this.tasksDoing.length, this.tasksClosed.length];
+
+          myChart.update();
+        },
+      });
+
+      console.log("after new Vue");
+      const chartData = {
+        labels: ["Backlog", "In Progess", "Closed"],
+        datasets: [
+          {
+            label: "Back",
+            data: [1, 1, 1],
+            backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)", "rgb(255, 205, 86)"],
+            borderWidth: 1,
+          },
+        ],
+      };
+
+      const config = {
+        type: "pie",
+        data: chartData,
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: "top",
+            },
+            title: {
+              display: true,
+              text: " Kanban Stat",
+            },
+          },
+        },
+      };
+      const ctx = document.getElementById("myChart");
+      const myChart = new Chart(ctx, config);
+      console.log("instantiate pie chart");
+    </script>
+  </body>
+</html>
